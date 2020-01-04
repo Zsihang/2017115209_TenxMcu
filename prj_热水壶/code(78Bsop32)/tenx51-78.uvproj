@@ -406,6 +406,11 @@
               <FileType>1</FileType>
               <FilePath>.\isr.c</FilePath>
             </File>
+            <File>
+              <FileName>buzz.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\buzz.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

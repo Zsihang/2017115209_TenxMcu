@@ -19,5 +19,7 @@ extern uint8_t ledcom_State;
 // Function ------------------------------------
 void TimeProcess();
 void TaskSetting();
+void TaskProcess();
+//void DisplayProcess();
 void Delay(uint16_t time);
 #endif
