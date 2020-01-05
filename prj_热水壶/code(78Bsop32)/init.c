@@ -25,8 +25,12 @@ void SysInit() {
   _nop_();
   
 	// IO 模式初始化
-  P1MODL = 0xa8;
-  P1MODH = 0xaa;
+  //P1MODL = 0xa8;
+  //P1MODH = 0xaa;
+	P1MODH = 0x2a;
+  P3MODH = 0x28;
+  P1MODL = 0x8a;
+  P3MODL = 0x84;
 
   // IO 状态初始化
  

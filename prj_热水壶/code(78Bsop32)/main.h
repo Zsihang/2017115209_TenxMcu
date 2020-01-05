@@ -10,8 +10,12 @@
 // Globle Var -----------------------------------------
 #ifdef __main_c
 uint8_t ledcom_State;
+modeValue;
+
 #else
 extern uint8_t ledcom_State;
+extern int modeValue;
+
 #endif
 
 // Action Macro: exp: #define F_getData() ------

@@ -3,6 +3,8 @@
 
 //===============================main主函数====================================
 void main() {
+		
+		modeValue = 1; //初始状态为1
 
 		SysInit();				//芯片系统初始化
 		VarsInit();
@@ -10,7 +12,7 @@ void main() {
 
 		/***实现LED灯点亮***/
 		//同时点亮LED1和LED2
-		LED1_and_LED2();
+		//LED1_and_LED2();
 	
 		//点亮LED1
 		//LED1_ON();
@@ -19,17 +21,26 @@ void main() {
 		//LED2_ON();
 	
 		/***实现控制蜂鸣器***/	
-		while(1){	
-			/***不足：声音频率的调节还不是很好***/
-			Buzz_On();
-		}
+		//while(1){	
+			/**不足：声音频率的调节还不是很好***/
+			//Buzz_ON();
+		//}
 
+	  //开始煮水（数码管计数，从30-99，模拟煮水的过程）
+		//Num_display();
+		
+		//煮水沸腾之后（数码管计数到99时），LED灯开始闪烁并且蜂鸣器警报提醒
+		//LedFlash();			//让LED灯闪烁
+		//Buzz_On();					//蜂鸣器报警提醒
+		
+	
 		while (1) {		
 			F_clearWDT();	  //喂狗
 
 			TimeProcess();
+			/***实现按键控制***/
 			TaskSetting();
-			TaskProcess();
+			//TaskProcess();
 			//DisplayProcess();	
 		}
 }
@@ -38,17 +49,19 @@ void main() {
 //===========================定义时间处理函数==================================
 //控制时钟
 void TimeProcess() {
-
-static uint8_t timer5ms = 0;
+	static uint8_t timer5ms = 0;		//按键计时
 
   if (b1ms) {
     // 1ms 执行一次
     b1ms = 0;
     timer5ms++;
   }
+	
   if (timer5ms >= 5) {
-		P1MODL = 0xa8;
-    	GetKeys();
+		timer5ms = 0;
+		P1MODL = 0xa8;	//设置IO模式为上拉输入
+		P1MODH = 0x2a;
+    GetKeys();			//获取按键
   }
 }
 //=============================================================================
@@ -57,22 +70,45 @@ static uint8_t timer5ms = 0;
 void TaskProcess() {}
 //=============================================================================
 	
-//=============================定义任务建立函数================================
-//===================任务：实现单端口复用进行按键控制led亮灭=================//
+//=============================定义按键控制函数================================
+//===================任务：实现按键控制led亮灭和蜂鸣器开关===================//
 void TaskSetting() {
-
-	if (ledcom_State){
-		//LED状态转换
-		if(D_keyValue1 == keyValue){
-			ledcom_State = ~ledcom_State;		
-		}
-		P1MODL = 0xaa;
-	}
-	else {
-			if(D_keyValue1 == keyValue){
-				ledcom_State = ~ledcom_State;	
+		if (Keyx == 1){
+			if(modeValue == 1) {
+				//LED状态转换
+				if(D_keyValue1 == keyValue1){
+						Key1();		//按下KEY1,同时点亮LED1和LED2
+				}
 			}
-	}
+		}
+		else if(Keyx == 2){
+			if(modeValue == 1) {
+				if(D_keyValue1 == keyValue1){
+						Key2();		//按下KEY2,点亮LED1
+				}
+			}
+		}			
+		else if(Keyx == 3){
+			if(modeValue == 1) {
+				if(D_keyValue1 == keyValue1){
+						Key3();		//按下KEY3,点亮LED2
+				}
+			}
+		}
+		else if(Keyx == 4){
+			if(modeValue == 1) {
+				if(D_keyValue1 == keyValue1){
+						Key4();		//按下KEY4，打开蜂鸣器
+				}
+			}
+		}
+		else {
+			if(modeValue == 1) {
+				if(D_keyValue1 == keyValue1){
+						modeValue = ~modeValue;			//改变状态
+				}
+			}
+		}
 }
 //=============================================================================
 

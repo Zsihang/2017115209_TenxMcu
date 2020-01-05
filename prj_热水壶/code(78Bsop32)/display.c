@@ -1,5 +1,6 @@
 #define __display_c
 #include "includeAll.h"
+#include "display.h"
 
 /**************************************************
 P_led1、P_led2分别置为1或0，控制相应LED灯的亮或灭
