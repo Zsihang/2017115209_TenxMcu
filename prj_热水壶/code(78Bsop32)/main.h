@@ -25,5 +25,6 @@ void TimeProcess();
 void TaskSetting();
 void TaskProcess();
 //void DisplayProcess();
+void BoilWater();
 void Delay(uint16_t time);
 #endif

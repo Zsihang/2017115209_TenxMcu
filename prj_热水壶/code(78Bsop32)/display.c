@@ -21,7 +21,6 @@ void LED1_and_LED2() {
 void LED1_ON() {
 		//初始化Led灯,将P1_0置为0
 		F_ledcom_On();
-	
 		P_led1=1;
 		P_led2=0;
 }
@@ -30,11 +29,16 @@ void LED1_ON() {
 void LED2_ON() {
 		//初始化Led灯,将P1_0置为0
 		F_ledcom_On();
-	
 		P_led1=0;
 		P_led2=1;
 }
 
+//关闭LED2
+void LED2_OFF() {
+		F_ledcom_On();
+		P_led1=0;
+		P_led2=0;
+}
 
 /**********************************
 SMG_COM1控制左数码管
@@ -104,7 +108,7 @@ void smg_display_num(uint8_t smgx,int num) {
 						 SMG_E = 0;
 						 SMG_F = 0;
 						 SMG_G = 0;
-						 SMG_DG = 1;
+						 SMG_DG = 0;
 						 break;
 			
 			case 2:SMG_A = 1;
@@ -114,7 +118,7 @@ void smg_display_num(uint8_t smgx,int num) {
 						 SMG_E = 1;
 						 SMG_F = 0;
 						 SMG_G = 1;
-						 SMG_DG = 1;
+						 SMG_DG = 0;
 						 break;
 
 			case 3:SMG_A = 1;
@@ -124,7 +128,7 @@ void smg_display_num(uint8_t smgx,int num) {
 						 SMG_E = 0;
 						 SMG_F = 0;
 						 SMG_G = 1;
-						 SMG_DG = 1;
+						 SMG_DG = 0;
 						 break;
 
 			case 4:SMG_A = 0;
@@ -134,7 +138,7 @@ void smg_display_num(uint8_t smgx,int num) {
 						 SMG_E = 0;
 						 SMG_F = 1;
 						 SMG_G = 1;
-						 SMG_DG = 1;
+						 SMG_DG = 0;
 						 break;
 			case 5:SMG_A = 1;
 						 SMG_B = 0;
@@ -143,7 +147,7 @@ void smg_display_num(uint8_t smgx,int num) {
 						 SMG_E = 0;
 						 SMG_F = 1;
 						 SMG_G = 1;
-						 SMG_DG = 1;
+						 SMG_DG = 0;
 						 break;
 
 			case 6:SMG_A = 1;
@@ -153,7 +157,7 @@ void smg_display_num(uint8_t smgx,int num) {
 						 SMG_E = 1;
 						 SMG_F = 1;
 						 SMG_G = 1;
-						 SMG_DG = 1;
+						 SMG_DG = 0;
 						 break;
 						 
 			case 7:SMG_A = 1;
@@ -163,7 +167,7 @@ void smg_display_num(uint8_t smgx,int num) {
 						 SMG_E = 0;
 						 SMG_F = 0;
 						 SMG_G = 0;
-						 SMG_DG = 1;
+						 SMG_DG = 0;
 						 break;
 			
 			case 8:SMG_A = 1;
@@ -173,7 +177,7 @@ void smg_display_num(uint8_t smgx,int num) {
 						 SMG_E = 1;
 						 SMG_F = 1;
 						 SMG_G = 1;
-						 SMG_DG = 1;
+						 SMG_DG = 0;
 						 break;
 				
 			case 9:SMG_A = 1;
@@ -183,15 +187,15 @@ void smg_display_num(uint8_t smgx,int num) {
 						 SMG_E = 0;
 						 SMG_F = 1;
 						 SMG_G = 1;
-						 SMG_DG = 1;
+						 SMG_DG = 0;
 						 break;
 		}
 }
 
 
 //数码管显示on(开)和of(关)
-void smg_display_num(uint8_t On_or_Of) {
-		if(On_or_Of == SMG_ON){
+void smg_display_on_of(uint8_t On_or_Of) {
+		if(On_or_Of == 1){
 				smg_choice(1);
 				SMG_A = 1;
 				SMG_B = 1;
@@ -212,7 +216,7 @@ void smg_display_num(uint8_t On_or_Of) {
 				SMG_G = 0;
 				SMG_DG = 0;
 		}
-		else if(On_or_Of == SMG_OFF){
+		else if(On_or_Of == 0){
 				smg_choice(1);
 				SMG_A = 1;
 				SMG_B = 1;

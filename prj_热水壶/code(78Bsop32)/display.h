@@ -45,11 +45,12 @@ extern bit bflag;
 void LED1_and_LED2();
 void LED1_ON();
 void LED2_ON();
+void LED2_OFF();
 
 //数码管
 void smg_init();
 void smg_choice(uint8_t smgx);
 void smg_display_num(uint8_t smgx,int num);
-void smg_display_num(uint8_t On_or_Of);
+void smg_display_on_of(uint8_t On_or_Of);
 
 #endif
